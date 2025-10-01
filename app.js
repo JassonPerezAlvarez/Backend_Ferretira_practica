@@ -1,6 +1,3 @@
-//Importar las dependencias necesarias
-import express from 'express';
-import cors from 'cors';
 
 //Importar las rutas
 import rutasCategorias from './scr/routes/categorias.routes.js';
@@ -18,17 +15,7 @@ import rutasVentas from './scr/routes/ventas.routes.js';
 
 // Crear la aplicación de Express
 const app = express();
-
-// Habilitar CORS para cualquier origen
-app.use(cors({
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type'],
-}));
-
-// Middleware para parsear el cuerpo de las solicitudes
-app.use(express.json({ limit: '10mb' })); //10 MB
-app.use(express.urlencoded({ limit: '10mb', extended: true }));
-
+@@ -21,11 +32,24 @@
 // Rutas
 app.use('/api', rutasCategorias);
 
@@ -51,6 +38,3 @@ app.use((req, res, next) => {
     message: 'La ruta que ha especificado no se encuentra registrada.'
   });
 });
-
-// Exportar la aplicación
-export default app;
