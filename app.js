@@ -1,40 +1,39 @@
+import express from 'express';
 
-//Importar las rutas
-import rutasCategorias from './scr/routes/categorias.routes.js';
-import rutasClientes from './scr/routes/clientes.routes.js';
-import rutasCompras from './scr/routes/compras.routes.js';
-import rutasDetallesCompra from './scr/routes/detalles_compras.routes.js';
-import rutasDetallesVenta from './scr/routes/detalles_venta.routes.js';
-import rutasEmpleados from './scr/routes/empleados.rotes.js';
-import rutasProductos from './scr/routes/productos.routes.js';
-import rutasUsuarios from './scr/routes/usuarios.routes.js';
-import rutasVentas from './scr/routes/ventas.routes.js';
-
-
-
+// === CORREGIDO: scr → src ===
+import rutasCategorias from './src/routes/categorias.routes.js';
+import rutasClientes from './src/routes/clientes.routes.js';
+import rutasCompras from './src/routes/compras.routes.js';
+import rutasDetallesCompra from './src/routes/detalles_compras.routes.js';
+import rutasDetallesVenta from './src/routes/detalle_venta.routes.js';
+import rutasEmpleados from './src/routes/empleados.routes.js';  // ← ¡Falta la 'u' en "routes"!
+import rutasProductos from './src/routes/productos.routes.js';
+import rutasUsuarios from './src/routes/usuarios.routes.js';
+import rutasVentas from './src/routes/ventas.routes.js';
 
 // Crear la aplicación de Express
 const app = express();
-@@ -21,11 +32,24 @@
-// Rutas
-app.use('/api', rutasCategorias);
 
-app.use('/api', rutasClientes);
-app.use('/api', rutasCompras);
-app.use('/api', rutasDetallesCompra);
-app.use('/api', rutasDetallesVenta);
-app.use('/api', rutasEmpleados);
-app.use('/api', rutasProductos);
-app.use('/api', rutasUsuarios);
-app.use('/api', rutasVentas);
+// Middleware para parsear JSON
+app.use(express.json());
 
-
-
-
+// === Rutas con prefijo /api ===
+app.use('/api/categorias', rutasCategorias);
+app.use('/api/clientes', rutasClientes);
+app.use('/api/compras', rutasCompras);
+app.use('/api/detalles-compra', rutasDetallesCompra);
+app.use('/api/detalles-venta', rutasDetallesVenta);
+app.use('/api/empleados', rutasEmpleados);
+app.use('/api/productos', rutasProductos);
+app.use('/api/usuarios', rutasUsuarios);
+app.use('/api/ventas', rutasVentas);
 
 // Manejo de rutas no encontradas
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).json({
     message: 'La ruta que ha especificado no se encuentra registrada.'
   });
 });
+
+// Exportar app (para usarlo en index.js)
+export default app;
