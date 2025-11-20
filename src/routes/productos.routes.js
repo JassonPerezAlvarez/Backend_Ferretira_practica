@@ -1,21 +1,21 @@
 import { Router } from 'express';
-import { obtenerProductos, obtenerProducto, registrarProducto, eliminarProducto, actualizarProductoPatch } from '../controllers/productos.controller.js';
+import { actualizarProductoPatch, eliminarProducto, obtenerProductos,obtenerProducto, registrarProducto } from '../controllers/producto.controller.js';
 
 const router = Router();
 
-// Obtener todos los productos
+// Ruta para obtener todos los productos
 router.get('/productos', obtenerProductos);
 
-// Obtener un producto por su ID
-router.get('/producto/:id_producto', obtenerProducto);
+// Ruta para obtener una productos por su ID
+router.get('/producto/:id_producto',obtenerProducto);
 
-// Ruta para registrar un nuevo producto
-router.post('/registrarproducto', registrarProducto);
+// Ruta para registrar una nueva Producto
+router.post('/registrarproducto',registrarProducto);
 
-// Eliminar un producto por ID
-router.delete('/eliminarProducto/:id_producto', eliminarProducto);
+// Ruta para eliminar un productos por su ID
+router.delete('/eliminarproducto/:id_producto', eliminarProducto);
 
-// Actualizar parcialmente un producto por su ID
-router.patch('/actualizarProducto/:id_producto', actualizarProductoPatch);
+// Ruta para actualizar una Productos por su ID
+router.patch('/actualizarproductopatch/:id_producto', actualizarProductoPatch);
 
 export default router;
